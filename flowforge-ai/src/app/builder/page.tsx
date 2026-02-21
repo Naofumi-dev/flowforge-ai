@@ -17,9 +17,51 @@ import '@xyflow/react/dist/style.css';
 import Link from 'next/link';
 
 const initialNodes: Node[] = [
-    { id: '1', position: { x: 250, y: 5 }, data: { label: 'Trigger: New User (Stripe)' }, type: 'input' },
-    { id: '2', position: { x: 100, y: 100 }, data: { label: 'Action: Send Welcome Email (Twilio)' } },
-    { id: '3', position: { x: 400, y: 100 }, data: { label: 'Action: Analyze Profile (OpenAI)' } },
+    {
+        id: '1',
+        position: { x: 250, y: 50 },
+        data: { label: 'Trigger: New User (Stripe)' },
+        type: 'input',
+        style: {
+            background: 'rgba(12, 12, 14, 0.7)',
+            backdropFilter: 'blur(16px)',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            borderLeft: '4px solid #f97316',
+            color: 'white',
+            borderRadius: '0.75rem',
+            padding: '16px',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+        }
+    },
+    {
+        id: '2',
+        position: { x: 100, y: 150 },
+        data: { label: 'Action: Send Welcome Email' },
+        style: {
+            background: 'rgba(12, 12, 14, 0.7)',
+            backdropFilter: 'blur(16px)',
+            border: '2px solid #10b981',
+            color: 'white',
+            borderRadius: '0.75rem',
+            padding: '16px',
+            boxShadow: '0 0 0 4px rgba(16, 185, 129, 0.1)'
+        }
+    },
+    {
+        id: '3',
+        position: { x: 400, y: 150 },
+        data: { label: 'Action: Analyze Profile' },
+        style: {
+            background: 'rgba(12, 12, 14, 0.7)',
+            backdropFilter: 'blur(16px)',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            borderLeft: '4px solid #14b8a6',
+            color: 'white',
+            borderRadius: '0.75rem',
+            padding: '16px',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+        }
+    }
 ];
 const initialEdges: Edge[] = [
     { id: 'e1-2', source: '1', target: '2', animated: true },
@@ -60,7 +102,7 @@ export default function Builder() {
                 >
                     <Controls />
                     <MiniMap />
-                    <Background gap={12} size={1} color="#ffffff1a" />
+                    <Background gap={32} size={2} color="#10b98122" />
                 </ReactFlow>
             </div>
         </div>
