@@ -52,15 +52,15 @@ export default function AnalyticsPage() {
                                 <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                     <defs>
                                         <linearGradient id="colorRuns" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#9513ec" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#9f1fef" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#008F53" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="#008F53" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
                                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff1a" />
                                     <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 12 }} tickLine={false} axisLine={false} />
                                     <YAxis tick={{ fill: '#94a3b8', fontSize: 12 }} tickLine={false} axisLine={false} />
                                     <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', fontWeight: 'bold' }} />
-                                    <Area type="monotone" dataKey="runs" stroke="#9f1fef" strokeWidth={3} fillOpacity={1} fill="url(#colorRuns)" />
+                                    <Area type="monotone" dataKey="runs" stroke="#008F53" strokeWidth={3} fillOpacity={1} fill="url(#colorRuns)" />
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>

@@ -5,7 +5,7 @@ export default function SignupPage() {
         <div className="min-h-screen bg-background-dark flex items-center justify-center p-4 relative overflow-hidden hero-mesh">
             {/* Decorative background orbs */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] orb-gradient rounded-full opacity-40 mix-blend-screen" style={{ background: "radial-gradient(circle, #fbbf24, #ef4444)" }}></div>
-            <div className="absolute bottom-0 -left-20 w-[600px] h-[600px] orb-gradient rounded-full opacity-30 mix-blend-screen" style={{ background: "radial-gradient(circle, #3b82f6, #9f1fef)" }}></div>
+            <div className="absolute bottom-0 -left-20 w-[600px] h-[600px] orb-gradient rounded-full opacity-30 mix-blend-screen" style={{ background: "radial-gradient(circle, #50C878, #008F53)" }}></div>
 
             <div className="w-full max-w-lg glass bg-card-dark p-8 sm:p-10 rounded-3xl border border-white/10 shadow-2xl relative z-10 my-8">
                 <div className="flex flex-col items-center mb-8">

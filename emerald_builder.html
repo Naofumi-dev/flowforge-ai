@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlowForge AI Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#10b981",
+                        "background-light": "#0c0c0e",
+                        "background-dark": "#0c0c0e",
+                        "node-dark": "rgba(18, 18, 22, 0.7)",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        .dot-grid {
+            background-image: radial-gradient(circle, #10b98122 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass {
+            background: rgba(12, 12, 14, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .node-connector {
+            stroke: #10b981;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-dasharray: 8;
+            filter: drop-shadow(0 0 4px #10b98144);
+        }
+    </style>
+<style>
+        .dot-grid {
+            background-image: radial-gradient(circle, #10b98122 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass {
+            background: rgba(12, 12, 14, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .node-connector {
+            stroke: #10b981;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-dasharray: 8;
+            filter: drop-shadow(0 0 4px #10b98144);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-hidden dark">
+<div class="relative flex h-screen w-full flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 py-4 glass z-20 border-b border-primary/20">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg text-white bg-emerald-500">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">FlowForge <span class="text-primary">AI</span></h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg font-semibold hover:bg-primary/20 transition-colors bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20">
+<span class="material-symbols-outlined text-lg">play_arrow</span>
+                    Simulate
+                </button>
+<div class="h-8 w-px bg-primary/20 mx-2"></div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-primary/10 rounded-lg text-slate-600">
+<span class="material-symbols-outlined">undo</span>
+</button>
+<button class="p-2 hover:bg-primary/10 rounded-lg text-slate-600">
+<span class="material-symbols-outlined">redo</span>
+</button>
+</div>
+</div>
+</header>
+<main class="relative flex-1 overflow-hidden flex">
+<!-- Sidebar / Toolkit -->
+<aside class="w-72 glass border-r border-primary/10 z-10 flex flex-col hidden md:flex bg-background-dark/50">
+<div class="p-4 border-b border-primary/10">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-2 bg-primary/5 border-none rounded-lg text-sm focus:ring-1 focus:ring-primary" placeholder="Search nodes..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-6">
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Triggers</h3>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10 shadow-sm cursor-grab hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-orange-500">schedule</span>
+<span class="text-sm font-medium">Schedule</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10 shadow-sm cursor-grab hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-blue-500">webhook</span>
+<span class="text-sm font-medium">Webhook</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">AI Actions</h3>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10 shadow-sm cursor-grab hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-emerald-500">psychology</span>
+<span class="text-sm font-medium">Text Generator</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10 shadow-sm cursor-grab hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-emerald-500">translate</span>
+<span class="text-sm font-medium">Translator</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10 shadow-sm cursor-grab hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-emerald-500">image</span>
+<span class="text-sm font-medium">Image Creator</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Logic</h3>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10 shadow-sm cursor-grab hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-teal-500">alt_route</span>
+<span class="text-sm font-medium">Condition</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Canvas Area -->
+<div class="flex-1 relative dot-grid overflow-hidden bg-background-light">
+<!-- SVG Connections Layer -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none">
+<path class="node-connector" d="M 280 200 C 350 200, 350 320, 420 320"></path>
+<path class="node-connector opacity-40" d="M 620 320 C 690 320, 690 240, 760 240"></path>
+<path class="node-connector opacity-40" d="M 620 320 C 690 320, 690 400, 760 400"></path>
+</svg>
+<!-- Nodes -->
+<!-- Node 1: Trigger -->
+<div class="absolute left-20 top-40 w-60 glass rounded-xl shadow-2xl border-l-4 border-l-orange-500 p-4 text-white">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500">webhook</span>
+<h4 class="font-bold text-sm">HTTP Webhook</h4>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">more_vert</span>
+</div>
+<p class="text-xs text-slate-500 mb-4 italic text-slate-300">Listen for incoming JSON events</p>
+<div class="flex justify-end relative">
+<div class="absolute -right-6 top-0 w-4 h-4 rounded-full border-2 border-white shadow-sm bg-emerald-500"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Output</span>
+</div>
+</div>
+<!-- Node 2: Action -->
+<div class="absolute left-1/3 top-1/2 -translate-y-1/2 w-64 glass rounded-xl shadow-2xl border-2 border-primary p-5 ring-4 ring-primary/10 text-white border-emerald-500 ring-emerald-500/10">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined fill-1 text-emerald-500">auto_awesome</span>
+<h4 class="font-bold text-sm">AI Text Generator</h4>
+</div>
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+</div>
+<div class="space-y-3">
+<div class="bg-primary/10 p-3 rounded-lg border border-primary/20 bg-emerald-500/10 border-emerald-500/20">
+<label class="text-[10px] font-bold uppercase block mb-1 text-emerald-500">Prompt</label>
+<p class="text-xs text-slate-700 text-slate-300">Summarize the incoming message in 3 bullet points...</p>
+</div>
+</div>
+<div class="flex justify-between mt-6 relative">
+<div class="relative">
+<div class="absolute -left-7 top-0 w-4 h-4 rounded-full border-2 border-white shadow-sm bg-emerald-500"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Input</span>
+</div>
+<div class="relative">
+<div class="absolute -right-7 top-0 w-4 h-4 rounded-full border-2 border-white shadow-sm bg-emerald-500"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Output</span>
+</div>
+</div>
+</div>
+<!-- Node 3: Logic -->
+<div class="absolute right-20 top-1/4 w-60 glass rounded-xl shadow-2xl border-l-4 border-l-teal-500 p-4 text-white">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-500">alt_route</span>
+<h4 class="font-bold text-sm">Sentiment Split</h4>
+</div>
+</div>
+<p class="text-xs text-slate-500 text-slate-300">If score &gt; 0.8</p>
+<div class="flex flex-col gap-4 mt-4 relative">
+<div class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-300 border-2 border-white shadow-sm"></div>
+<div class="flex justify-end relative">
+<div class="absolute -right-6 top-0 w-4 h-4 rounded-full bg-teal-400 border-2 border-white shadow-sm"></div>
+<span class="text-[10px] font-bold text-teal-600 uppercase">True</span>
+</div>
+<div class="flex justify-end relative">
+<div class="absolute -right-6 top-0 w-4 h-4 rounded-full bg-slate-400 border-2 border-white shadow-sm"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">False</span>
+</div>
+</div>
+</div>
+<!-- Floating Controls -->
+<div class="absolute bottom-32 right-8 flex flex-col gap-2">
+<button class="w-10 h-10 glass rounded-lg flex items-center justify-center text-slate-600 shadow-sm hover:text-emerald-500">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 glass rounded-lg flex items-center justify-center text-slate-600 shadow-sm hover:text-emerald-500">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 glass rounded-lg flex items-center justify-center text-slate-600 shadow-sm hover:text-emerald-500">
+<span class="material-symbols-outlined">near_me</span>
+</button>
+</div>
+<!-- Mini Map -->
+<div class="absolute bottom-32 left-8 w-32 h-20 glass rounded-lg border border-primary/10 overflow-hidden hidden lg:block">
+<div class="w-full h-full relative opacity-50 dot-grid">
+<div class="absolute top-4 left-2 w-4 h-3 bg-orange-500/40 rounded"></div>
+<div class="absolute top-8 left-12 w-6 h-4 rounded bg-emerald-500/40"></div>
+<div class="absolute top-4 left-24 w-4 h-6 bg-teal-500/40 rounded"></div>
+</div>
+</div>
+</div>
+<!-- Bottom AI Input Bar -->
+<div class="absolute bottom-0 left-0 right-0 p-6 z-30">
+<div class="max-w-3xl mx-auto space-y-3">
+<div class="flex gap-2 justify-center">
+<button class="px-3 py-1 backdrop-blur rounded-full border border-primary/10 text-[10px] font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all shadow-sm bg-black/40 text-white/80 border-white/10 text-emerald-500">Summarize Emails</button>
+<button class="px-3 py-1 backdrop-blur rounded-full border border-primary/10 text-[10px] font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all shadow-sm bg-black/40 text-white/80 border-white/10 text-emerald-500">Auto-reply Logic</button>
+<button class="px-3 py-1 backdrop-blur rounded-full border border-primary/10 text-[10px] font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all shadow-sm bg-black/40 text-white/80 border-white/10 text-emerald-500">Data Extraction</button>
+</div>
+<div class="glass rounded-2xl p-2 shadow-2xl border-2 flex items-center gap-2 border-emerald-500/20">
+<div class="p-3 text-emerald-500">
+<span class="material-symbols-outlined fill-1">auto_awesome</span>
+</div>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-3 px-2" placeholder="Describe the workflow you want to build..." type="text"/>
+<button class="text-white p-3 rounded-xl hover:opacity-90 transition-opacity bg-black/40 text-white/80 border-white/10 bg-emerald-500">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Nav Bar -->
+<div class="flex gap-2 border-t border-white/5 bg-background-dark px-4 pb-4 pt-2 md:hidden">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-emerald-500" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<p class="text-[10px] font-bold">Canvas</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<p class="text-[10px] font-medium">Nodes</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">history</span>
+<p class="text-[10px] font-medium">History</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-medium">Settings</p>
+</a>
+</div>
+</div>
+</body></html>

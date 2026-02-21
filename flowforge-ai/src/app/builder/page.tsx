@@ -42,7 +42,7 @@ export default function Builder() {
                     <Link href="/dashboard" className="text-slate-400 hover:text-white transition-colors">
                         <span className="material-symbols-outlined">arrow_back</span>
                     </Link>
-                    <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500">Flow Builder</h1>
+                    <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400">Flow Builder</h1>
                 </div>
                 <div className="flex gap-2">
                     <button className="px-4 py-2 text-sm font-semibold text-slate-300 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10">Test Run</button>

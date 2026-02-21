@@ -2,7 +2,7 @@
 
 @theme {
   --font-display: "Inter", "sans-serif";
-  --color-primary: #9f1fef;
+  --color-primary: #008F53;
   --color-background-light: #1b1022;
   --color-background-dark: #0a050d;
   --color-card-dark: #150b1a;
@@ -10,14 +10,14 @@
 
 @layer utilities {
   .glass {
-    background: rgba(21, 11, 26, 0.6);
+    background: rgba(10, 5, 13, 0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(159, 31, 239, 0.2);
+    border: 1px solid rgba(0, 143, 83, 0.2);
   }
 
   .orb-gradient {
-    background: radial-gradient(circle at 30% 30%, #9f1fef, #4f117c, #0a050d);
+    background: radial-gradient(circle at 30% 30%, #008F53, #064e3b, #0a050d);
     filter: blur(60px);
     opacity: 0.4;
   }
@@ -25,9 +25,9 @@
   .hero-mesh {
     background-color: #0a050d;
     background-image:
-      radial-gradient(at 0% 0%, rgba(159, 31, 239, 0.1) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(159, 31, 239, 0.05) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(159, 31, 239, 0.08) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(0, 143, 83, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(0, 143, 83, 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(0, 143, 83, 0.08) 0px, transparent 50%);
   }
 }
 

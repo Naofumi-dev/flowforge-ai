@@ -38,7 +38,7 @@ export default function Home() {
       <header className="relative overflow-hidden hero-mesh pt-16 pb-24 lg:pt-32 lg:pb-40">
         {/* Floating Orb Visuals */}
         <div className="absolute top-1/4 -right-20 w-96 h-96 orb-gradient rounded-full"></div>
-        <div className="absolute bottom-0 -left-20 w-80 h-80 orb-gradient rounded-full" style={{ background: "radial-gradient(circle, #3b82f6, #9513ec)", opacity: 0.3 }}></div>
+        <div className="absolute bottom-0 -left-20 w-80 h-80 orb-gradient rounded-full" style={{ background: "radial-gradient(circle, #50C878, #008F53)", opacity: 0.3 }}></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
@@ -47,7 +47,7 @@ export default function Home() {
               Next-Gen Automation
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
-              Turn workflows into <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500">smart AI</span> automations
+              Turn workflows into <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400">smart AI</span> automations
             </h1>
             <p className="text-lg md:text-xl text-slate-400 mb-10 leading-relaxed max-w-2xl mx-auto">
               Boost productivity by 10x with seamless orchestration. Our platform bridges the gap between simple tasks and enterprise-scale AI coordination.

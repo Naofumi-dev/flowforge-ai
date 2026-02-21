@@ -5,7 +5,7 @@ export default function LoginPage() {
         <div className="min-h-screen bg-background-dark flex items-center justify-center p-4 relative overflow-hidden hero-mesh">
             {/* Decorative background orbs */}
             <div className="absolute top-1/4 -right-20 w-96 h-96 orb-gradient rounded-full opacity-50"></div>
-            <div className="absolute bottom-1/4 -left-20 w-80 h-80 orb-gradient rounded-full opacity-40 mix-blend-screen" style={{ background: "radial-gradient(circle, #3b82f6, #9f1fef)" }}></div>
+            <div className="absolute bottom-1/4 -left-20 w-80 h-80 orb-gradient rounded-full opacity-40 mix-blend-screen" style={{ background: "radial-gradient(circle, #50C878, #008F53)" }}></div>
 
             <div className="w-full max-w-md glass bg-card-dark p-8 sm:p-10 rounded-3xl border border-white/10 shadow-2xl relative z-10">
                 <div className="flex flex-col items-center mb-8">
