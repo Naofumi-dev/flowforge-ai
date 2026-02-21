@@ -4,42 +4,53 @@ import { WorkflowEngine } from '../engine';
 import { Workflow } from '../models/Workflow';
 import connectToDatabase from '../mongoose';
 
-const redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+export let workflowQueue: Queue | null = null;
+export let workflowWorker: Worker | null = null;
 
-const connection = new IORedis(redisUrl, {
-    maxRetriesPerRequest: null,
-});
+if (process.env.REDIS_URL) {
+    try {
+        const connection = new IORedis(process.env.REDIS_URL, {
+            maxRetriesPerRequest: null,
+            lazyConnect: true, // prevent immediate connection failing build logs
+        });
 
-export const workflowQueue = new Queue('workflow-execution', { connection: connection as any });
+        // Eagerly connect but don't crash
+        connection.connect().catch(e => console.warn('Redis connection failed, BullMQ disabled', e.message));
 
-export const workflowWorker = new Worker(
-    'workflow-execution',
-    async (job) => {
-        try {
-            await connectToDatabase();
-            const { workflowId, triggerEvent } = job.data;
+        workflowQueue = new Queue('workflow-execution', { connection: connection as any });
 
-            const workflowData = await Workflow.findById(workflowId);
-            if (!workflowData) {
-                throw new Error(`Workflow ${workflowId} not found`);
-            }
+        workflowWorker = new Worker(
+            'workflow-execution',
+            async (job) => {
+                try {
+                    await connectToDatabase();
+                    const { workflowId, triggerEvent } = job.data;
 
-            const engine = new WorkflowEngine(workflowData, triggerEvent);
-            await engine.run();
+                    const workflowData = await Workflow.findById(workflowId);
+                    if (!workflowData) {
+                        throw new Error(`Workflow ${workflowId} not found`);
+                    }
 
-            return { success: true };
-        } catch (error: any) {
-            console.error('Worker failed to execute workflow:', error);
-            throw error;
-        }
-    },
-    { connection: connection as any, concurrency: 5 } // Scalable background execution
-);
+                    const engine = new WorkflowEngine(workflowData, triggerEvent);
+                    await engine.run();
 
-workflowWorker.on('completed', (job) => {
-    console.log(`Job ${job.id} completed workflow execution!`);
-});
+                    return { success: true };
+                } catch (error: any) {
+                    console.error('Worker failed to execute workflow:', error);
+                    throw error;
+                }
+            },
+            { connection: connection as any, concurrency: 5 }
+        );
 
-workflowWorker.on('failed', (job, err) => {
-    console.error(`Job ${job?.id} failed with error ${err.message}`);
-});
+        workflowWorker.on('completed', (job) => {
+            console.log(`Job ${job.id} completed workflow execution!`);
+        });
+
+        workflowWorker.on('failed', (job, err) => {
+            console.error(`Job ${job?.id} failed with error ${err.message}`);
+        });
+    } catch (e) {
+        console.warn('Failed to initialize Redis Queue:', e);
+    }
+}

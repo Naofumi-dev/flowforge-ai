@@ -12,7 +12,7 @@ export async function POST(req: Request, props: { params: Promise<{ id: string }
         if (!workflow) return NextResponse.json({ error: 'Not Found' }, { status: 404 });
 
         // Try queuing to BullMQ in production, otherwise run inline for serverless setups
-        if (process.env.REDIS_URL) {
+        if (process.env.REDIS_URL && workflowQueue) {
             await workflowQueue.add('execute-flow', { workflowId: workflow._id, triggerEvent: { testRun: true } });
             return NextResponse.json({ success: true, message: 'Workflow queued for execution in BullMQ!' });
         } else {
